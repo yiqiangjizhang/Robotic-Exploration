@@ -124,6 +124,8 @@ voy1_max_v(1) = max(dv1(4,:));
 voy1_max_v(2) = max(dv1(5,:));
 voy1_max_v(3) = max(dv1(6,:));
 
+
+
 % Voyager 2
 voy2_max_v(1) = max(dv2(4,:));
 voy2_max_v(2) = max(dv2(5,:));
