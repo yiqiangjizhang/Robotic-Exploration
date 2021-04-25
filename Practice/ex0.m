@@ -106,7 +106,8 @@ end
 utcstrV1= cspice_et2utc( et(a), 'C', 5 ); % Convert ephemeris time into UTC format C calendar. Date of the closest position to saturn.v1
 utcstrV2= cspice_et2utc( et2(b), 'C', 5 ); % Convert ephemeris time into UTC format C calendar. Date of the closest position to saturn.v2
 
-figure(1);
+plot_pdf = figure(1);
+set(plot_pdf,'Position',[100 100 1000 700])
 plot3(djup(1,:)/scale,djup(2,:)/scale,djup(3,:)/scale,'r','LineWidth',LW)
 hold on
 plot3(dio(1,:)/scale,dio(2,:)/scale,dio(3,:)/scale,'g','LineWidth',LW)
@@ -126,14 +127,18 @@ ylabel('JR');
 zlabel('JR');
 axis('equal');
 legend({'Jupiter','Io','E','V1','V2','Pos1','Pos2'});
-title('Jupiter Voyager 1 and 2 flyby. Obs: Jupiter barycenter');
+title('\textbf{Jupiter Voyager 1 and 2 flyby. Obs: Jupiter barycenter}');
 grid on
 grid minor
 % set(findall(gcf,'-property','FontSize'),'FontSize',18);
 
 
+% % Save png
+print(gcf,'jupiter_voyager12_flyby.png','-dpng','-r1000');
+
 % Plot 2
-figure(2);
+plot_pdf2 = figure(2);
+set(plot_pdf2,'Position',[200 100 800 500])
 plot3(Pos1(1,1)/scale,Pos1(1,2)/scale,Pos1(1,3)/scale,'g*','LineWidth',6)
 hold on
 plot3(Pos2(1,1)/scale,Pos2(1,2)/scale,Pos2(1,3)/scale,'r*','LineWidth',6)
@@ -147,6 +152,8 @@ title('\textbf{Minimum position of Voyager 1 and 2 flyby across Jupiter. Obs: Ju
 grid on
 grid minor
 
+% Save png
+print(gcf,'minimum_pos_voyager12.png','-dpng','-r1000');
 
 %% Maximum velocity computation
 
@@ -196,7 +203,8 @@ V2_pos_max_vel(1,2) = dv2(2,a);
 V2_pos_max_vel(1,3) = dv2(3,a);
 
 
-figure(3)
+plot_pdf3 = figure(3);
+set(plot_pdf3,'Position',[200 100 800 500])
 plot3(V1_pos_max_vel(1)/scale,V1_pos_max_vel(2)/scale,V1_pos_max_vel(3)/scale,'g*','LineWidth',6);
 hold on
 plot3(V2_pos_max_vel(1)/scale,V2_pos_max_vel(2)/scale,V2_pos_max_vel(3)/scale,'r*','LineWidth',6);
@@ -210,7 +218,8 @@ legend({'V1','V2','Jupiter'});
 title('\textbf{V1 and V2 maximum velocity position. Obs: Jupiter barycenter}');
 
 
-
+% Save png
+print(gcf,'maximum_velocity_pos_voyager12.png','-dpng','-r1000');
 
 
 endSPICE
