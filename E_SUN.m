@@ -56,7 +56,7 @@ frame = 'ECLIPJ2000';
 abcorr = 'NONE';
 
 % The same but the observer now will be Jupiter barycenter
-observer = 'SUN'; % Jupiter barycenter (not Jupiter system barycenter)
+observer = '599'; % Jupiter barycenter (not Jupiter system barycenter)
 scale = 149597871; % Jupiter polar radius (km) 
 
 % Get the position and velocity
@@ -141,24 +141,24 @@ voy2_max_v_pos(3) = find(dv2(6,:) == voy2_max_v(3));
 
 %% Plots
 
-% PLot 1
+% Plot 1
 figure(1);
 plot3(Pos1(1,1)/scale,Pos1(1,2)/scale,Pos1(1,3)/scale,'g*','LineWidth',6)
 hold on
 plot3(Pos2(1,1)/scale,Pos2(1,2)/scale,Pos2(1,3)/scale,'r*','LineWidth',6)
-plot3(dsun(1,:)/scale,dsun(2,:)/scale,dsun(3,:)/scale,'p','LineWidth',LW)
-plot3(djup(1,:)/scale,djup(2,:)/scale,djup(3,:)/scale,'p','LineWidth',LW)
+% plot3(dsun(1,:)/scale,dsun(2,:)/scale,dsun(3,:)/scale,'p','LineWidth',LW)
+plot3(djup(1,:)/scale,djup(2,:)/scale,djup(3,:)/scale,'b*','LineWidth',LW)
 xlabel('AU');
 ylabel('AU');
 zlabel('AU');
 % xlim([-4 4])
 % ylim([-4 6])
 % axis('equal');
-legend({'PosV1','PosV2','SUN','Jupiter'});
-title('\textbf{Jupiter Voyager 1 and 2 flyby. Obs: Sun}');
+legend({'PosV1','PosV2','Jupiter','Jupiter'});
+title('\textbf{Minimum position of Voyager 1 and 2 flyby across Jupiter. Obs: Jupiter}');
 grid on
 grid minor
-set(findall(gcf,'-property','FontSize'),'FontSize',18);
+% set(findall(gcf,'-property','FontSize'),'FontSize',18);
 
 
 % Plot 2
@@ -170,13 +170,13 @@ figure(2)
 plot3(voy1_max_v_pos(1)/scale,voy1_max_v_pos(2)/scale,voy1_max_v_pos(3)/scale,'g*','LineWidth',6);
 hold on
 plot3(voy2_max_v_pos(1)/scale,voy2_max_v_pos(2)/scale,voy2_max_v_pos(3)/scale,'r*','LineWidth',6);
-plot3(djup(1,:)/scale,djup(2,:)/scale,djup(3,:)/scale,'p','LineWidth',LW)
+plot3(djup(1,:)/scale,djup(2,:)/scale,djup(3,:)/scale,'b*','LineWidth',LW)
 grid on
 grid minor
 xlabel('AU');
 ylabel('AU');
 zlabel('AU');
 legend({'V1','V2','Jupiter'});
-title('\textbf{V1 and V2 maximum velocity position. Obs: Sun}');
+title('\textbf{V1 and V2 maximum velocity position. Obs: Jupiter}');
 
 endSPICE
