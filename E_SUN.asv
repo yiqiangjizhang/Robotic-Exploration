@@ -139,9 +139,7 @@ voy2_max_v_pos(2) = find(dv2(5,:) == voy2_max_v(2));
 voy2_max_v_pos(3) = find(dv2(6,:) == voy2_max_v(3));
 
 
-%% Plots
 
-% PLot 1
 figure(1);
 plot3(Pos1(1,1)/scale,Pos1(1,2)/scale,Pos1(1,3)/scale,'g*','LineWidth',6)
 hold on
@@ -161,15 +159,10 @@ grid minor
 set(findall(gcf,'-property','FontSize'),'FontSize',18);
 
 
-% Plot 2
-[djup,lt] = cspice_spkezr('599',et,frame,abcorr,'599'); % Jupiter 
-[dv1, lt] = cspice_spkezr('VG1',et,frame,abcorr,'599'); % Voyager1
-[dv2, lt] = cspice_spkezr('VG2',et2,frame,abcorr,'599'); % Voyager2
 
 figure(2)
 plot3(voy1_max_v_pos(1)/scale,voy1_max_v_pos(2)/scale,voy1_max_v_pos(3)/scale,'g*','LineWidth',6);
-hold on
-plot3(voy2_max_v_pos(1)/scale,voy2_max_v_pos(2)/scale,voy2_max_v_pos(3)/scale,'r*','LineWidth',6);
+plot3(voy2_max_v_pos(1)/scale,voy2_max_v_pos(2)/scale,voy2_max_v_pos(3)/scale,'g*','LineWidth',6);
 plot3(djup(1,:)/scale,djup(2,:)/scale,djup(3,:)/scale,'p','LineWidth',LW)
 grid on
 grid minor
