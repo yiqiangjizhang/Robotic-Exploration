@@ -48,7 +48,7 @@ fprintf('RESSLIB version %s \n',v);
 
 utctime='1965-04-25 T23:59:19'; % 1979-03-03 T00:00:00
 et0 = cspice_str2et(utctime); % converts time (which is a string) to a number
-NDAYS = 50; % study time
+NDAYS = 1; % study time
 et1 = et0 + 24*3600*NDAYS; % end of query time
 et=linspace(et0,et1,10000);
 
@@ -71,9 +71,9 @@ LW = 0.5;
 plot_pdf = figure(1);
 plot3(dplu(1,:)/scale,dplu(2,:)/scale,dplu(3,:)/scale,'r','LineWidth',LW)
 hold on
-plot3(dchar(1,:)/scale,dchar(2,:)/scale,dchar(3,:)/scale,'b','LineWidth',LW)
-plot3(dnix(1,:)/scale,dnix(2,:)/scale,dnix(3,:)/scale,'g','LineWidth',LW)   
-plot3(dhydr(1,:)/scale,dhydr(2,:)/scale,dhydr(3,:)/scale,'c','LineWidth',LW)
+plot3(dchar(1,:)/scale,dchar(2,:)/scale,dchar(3,:)/scale,'r','LineWidth',LW)
+plot3(dnix(1,:)/scale,dnix(2,:)/scale,dnix(3,:)/scale,'r','LineWidth',LW)
+plot3(dplu(1,:)/scale,dplu(2,:)/scale,dplu(3,:)/scale,'r','LineWidth',LW)
 grid on
 grid minor
 
