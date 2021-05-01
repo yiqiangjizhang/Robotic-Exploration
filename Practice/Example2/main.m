@@ -1,8 +1,8 @@
 %% Pluto plot
 %
 %-------------------------------------------------------------------------%
-% Exercise: This code plots the position of Voyagers 1 and 2 with Sun as
-% the observer
+% Exercise: This code plots the position of Pluto's moon with relation to
+% Pluto's trajectory and Plutos barycenter
 %-------------------------------------------------------------------------%
 
 % Date: 23/04/2021
@@ -24,6 +24,9 @@ set(groot,'defaultLegendInterpreter','latex');
 % Recall that RESSlib should be in Matlab Path 
 % Addpath Yi Qiang
 addpath 'C:\Users\yiqia\Documents\Spice_Doc\RESSlib'
+
+
+%% Using nh_plu017.bps
 
 % From kernels we get the desired data.
 METAKR={'https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls', ...
@@ -56,9 +59,8 @@ et=linspace(et0,et1,10000);
 frame = 'ECLIPJ2000';
 abcorr = 'NONE';
 
-%% 
 
-% The same but the observer now will be Jupiter barycenter
+% Observer will be Pluto barycenter
 observer = '9'; % PLUTO BARYCENTER (9)
 scale = 1188.3; % Pluto's radius (km)
 
@@ -74,19 +76,62 @@ hold on
 plot3(dchar(1,:)/scale,dchar(2,:)/scale,dchar(3,:)/scale,'b','LineWidth',LW)
 plot3(dnix(1,:)/scale,dnix(2,:)/scale,dnix(3,:)/scale,'g','LineWidth',LW)   
 plot3(dhydr(1,:)/scale,dhydr(2,:)/scale,dhydr(3,:)/scale,'c','LineWidth',LW)
+
+% The same but the observer now will be Pluto
+observer = '999'; % PLUTO (999)
+scale = 1188.3; % Pluto's radius (km)
+
+[dplu,lt] = cspice_spkezr('999',et,frame,abcorr,observer); % pluto 
+[dchar,lt] = cspice_spkezr('901',et,frame,abcorr,observer); % pluto 
+[dnix,lt] = cspice_spkezr('902',et,frame,abcorr,observer); % pluto 
+[dhydr,lt] = cspice_spkezr('903',et,frame,abcorr,observer); % pluto 
+
+LW = 0.5;
+plot_pdf = figure(1);
+set(plot_pdf,'Position',[475 250 800 500])
+plot3(dplu(1,:)/scale,dplu(2,:)/scale,dplu(3,:)/scale,'r--','LineWidth',LW)
+plot3(dchar(1,:)/scale,dchar(2,:)/scale,dchar(3,:)/scale,'b--','LineWidth',LW)
+plot3(dnix(1,:)/scale,dnix(2,:)/scale,dnix(3,:)/scale,'g--','LineWidth',LW)   
+plot3(dhydr(1,:)/scale,dhydr(2,:)/scale,dhydr(3,:)/scale,'c--','LineWidth',LW)
+% hold off
+legend('Pluto', 'Charon', 'Nix', 'Hydra','Pluto', 'Charon', 'Nix', 'Hydra');
+xlabel('x PR');
+ylabel('y PR');
+zlabel('z PR');
+title("\textbf{Pluto's moons trajectories. Obs: Pluto and Pluto's barycenter}");
 grid on
 grid minor
 
+annotation('textbox', [0.8, 0.35, .19, .1], 'string', "- wrt Pluto's barycenter -- wrt Pluto")
 
+% view(90,0)
 
+% PCA=pca(data);
 
+% p1 = [-1.70453,26.496,45.7425];
+% p2 = [30.3903,4.87227,-45.0984];
+% p3 = [-34.6471,-42.0259, -7.48276];
+% normal = cross(p1 - p2, p1 - p3);
+% d = p1(1)*normal(1) + p1(2)*normal(2) + p1(3)*normal(3);
+% d = -d;
+% x = -100:100; y = -100:100;
+% [X,Y] = meshgrid(x,y);
+% Z = (-d - (normal(1)*X) - (normal(2)*Y))/normal(3);
+% mesh(X,Y,Z)
 
+% 1106.7936956298*x+1729.4739807428*y+-2911.5399709631*z+89,243.53758603=0;
+A = - 5.073662414290200e+03;
+B = 4.700788378518801e+03;
+C = - 2.911539970963100e+03;
+D = - 19.181550484606309;
 
+[x_data,y_data] = meshgrid(-50:100:50);
+z = -1/C*(A*x_data + B*y_data +D);
+surf(x_data,y_data,z)
 
-
-
-
-
-
+view(45,90-67.17)
+% view(112.83,0)
+% view(89.32,-90)
+% campos('auto')
 
 endSPICE
