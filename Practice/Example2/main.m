@@ -90,7 +90,7 @@ LW = 0.5;
 plot_pdf = figure(1);
 set(plot_pdf,'Position',[475 250 800 500])
 plot3(dplu(1,:)/scale,dplu(2,:)/scale,dplu(3,:)/scale,'r--','LineWidth',LW)
-plot3(dchar(1,:)/scale,dchar(2,:)/scale,dchar(3,:)/scale,'b--','LineWidth',LW)
+plot3(dchar(1,:)/scale,dchar(2,:)/scale,dchar(3,:)/scale,'b--','LineWidth',2)
 plot3(dnix(1,:)/scale,dnix(2,:)/scale,dnix(3,:)/scale,'g--','LineWidth',LW)   
 plot3(dhydr(1,:)/scale,dhydr(2,:)/scale,dhydr(3,:)/scale,'c--','LineWidth',LW)
 % hold off
@@ -125,13 +125,15 @@ B = 4.700788378518801e+03;
 C = - 2.911539970963100e+03;
 D = - 19.181550484606309;
 
-[x_data,y_data] = meshgrid(-50:100:50);
-z = -1/C*(A*x_data + B*y_data +D);
-surf(x_data,y_data,z)
+% [x_data,y_data] = meshgrid(-50:100:50);
+% z = -1/C*(A*x_data + B*y_data +D);
+% surf(x_data,y_data,z)
 
-view(45,90-67.17)
+% view(45,90-67.17)
 % view(112.83,0)
 % view(89.32,-90)
 % campos('auto')
+
+view([-5.073662414290200 +4.700788378518801 -2.911539970963100]);
 
 endSPICE
