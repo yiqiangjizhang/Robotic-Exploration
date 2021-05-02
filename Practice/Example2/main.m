@@ -106,8 +106,6 @@ annotation('textbox', [0.8, 0.35, .19, .1], 'string', "- wrt Pluto's barycenter 
 
 % view(90,0)
 
-% PCA=pca(data);
-
 % p1 = [-1.70453,26.496,45.7425];
 % p2 = [30.3903,4.87227,-45.0984];
 % p3 = [-34.6471,-42.0259, -7.48276];
@@ -119,21 +117,24 @@ annotation('textbox', [0.8, 0.35, .19, .1], 'string', "- wrt Pluto's barycenter 
 % Z = (-d - (normal(1)*X) - (normal(2)*Y))/normal(3);
 % mesh(X,Y,Z)
 
-% 1106.7936956298*x+1729.4739807428*y+-2911.5399709631*z+89,243.53758603=0;
+
 A = - 5.073662414290200e+03;
 B = 4.700788378518801e+03;
 C = - 2.911539970963100e+03;
 D = - 19.181550484606309;
 
-% [x_data,y_data] = meshgrid(-50:100:50);
-% z = -1/C*(A*x_data + B*y_data +D);
-% surf(x_data,y_data,z)
-
-% view(45,90-67.17)
-% view(112.83,0)
-% view(89.32,-90)
-% campos('auto')
-
 view([-5.073662414290200 +4.700788378518801 -2.911539970963100]);
+
+
+% Save pdf
+set(plot_pdf, 'Units', 'Centimeters');
+pos = get(plot_pdf, 'Position');
+set(plot_pdf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
+    'PaperSize',[pos(3), pos(4)]);
+print(plot_pdf, 'pluto_trajectory_and_moons.pdf', '-dpdf', '-r0');
+
+% Save png
+print(gcf,'pluto_trajectory_and_moons.png','-dpng','-r1000');
+
 
 endSPICE
