@@ -127,14 +127,14 @@ view([-5.073662414290200 +4.700788378518801 -2.911539970963100]);
 
 
 % Save pdf
-set(plot_pdf, 'Units', 'Centimeters');
-pos = get(plot_pdf, 'Position');
-set(plot_pdf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
-    'PaperSize',[pos(3), pos(4)]);
-print(plot_pdf, 'pluto_trajectory_and_moons.pdf', '-dpdf', '-r0');
-
-% Save png
-print(gcf,'pluto_trajectory_and_moons.png','-dpng','-r1000');
+% set(plot_pdf, 'Units', 'Centimeters');
+% pos = get(plot_pdf, 'Position');
+% set(plot_pdf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
+%     'PaperSize',[pos(3), pos(4)]);
+% print(plot_pdf, 'pluto_trajectory_and_moons.pdf', '-dpdf', '-r0');
+% 
+% % Save png
+% print(gcf,'pluto_trajectory_and_moons.png','-dpng','-r1000');
 
 
 endSPICE
