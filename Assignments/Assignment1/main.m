@@ -1,0 +1,176 @@
+%-------------------------------------------------------------------------%
+% Assignment 2: Spacecraft trajectory queries. For instance, plotting the trajectory during a flyby and
+% finding the minimum distance from the spacecraft to each of the bodies
+%-------------------------------------------------------------------------%
+
+% Date: 06/05/2021
+% Author/s: Group 1
+%   Rita Fardilha
+%   Yi Qiang Ji
+%   Èric Montserrat 
+%   Iván Sermanoukian
+
+% Subject: Robotic Exploration of the Solar System
+% Professor: Manel Soria & Arnau Miro
+
+% Clear workspace, command window and close windows
+clear;
+close all;
+clc;
+
+% Set interpreter to latex
+set(groot,'defaultAxesTickLabelInterpreter','latex');  
+set(groot,'defaulttextinterpreter','latex');
+set(groot,'defaultLegendInterpreter','latex');
+
+% Recall that RESSlib should be in Matlab Path 
+% Addpath Yi Qiang
+addpath 'C:\Users\yiqia\Documents\Spice_Doc\RESSlib'
+% Addpath Iván
+addpath('D:\HDD_Data\Iván\Workload\Q8-GRETA\Robotic_Exploration_of_the_Solar_System\RESSlib')
+% Addpath Èric
+addpath('F:\RESSoptativa\Resslib')
+% Addpath Rita
+addpath('C:\Users\Rita Fardilha\Desktop\RESSlib/');
+
+
+% From kernels we get the desired data.
+    METAKR={
+        % Leap Seconds Kernels file
+        'https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls', ...  
+        % Reconstructed trajectory data for the New Horizons spacecraft covering launch (2006-01-19) through (2007-03-19)
+        'https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/spk/nh_recon_e2j_v1.bsp', ... 
+        % Preliminary reconstructed trajectory data for the New Horizons spacecraft from (2007-03-19) to (2007-09-07) 
+        'https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/spk/nh_recon_j2sep07_prelimv1.bsp', ...
+        % Pluto approach, encounter and departure trajectory data
+        'https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/spk/nh_recon_pluto_od122_v01.bsp', ...
+        % Jupiter's system ephemeris data from (1924-12-28) to (2023-10-30)
+        % 'https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/spk/jup260.bsp', ...
+        % Pluto ephemeris data from  (1900-01-08) to (2100-01-01)
+        'https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/plu055.bsp', ...
+        % Jupiter System data from (1799-12-27) to (2200-01-05)
+        'https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/jup365.bsp'
+    }; 
+    
+    
+    %'https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/plu055.bsp', ...
+    %'https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/spk/nh_plu017.bsp'
+    %'https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/spk/nh_plu047_od122.bsp', ...
+    %'https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/spk/nh_recon_arrokoth_od147_v01.bsp', ...
+    %'https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/spk/nh_recon_pluto_od122_v01.bsp'
+    
+
+% Print RESSLIB version
+v=initSPICEv(fullK(METAKR));
+fprintf('RESSLIB version %s \n',v);
+
+
+%% Jupiter flyby (Feb 2007)
+
+% Time parameters                    _J designation for Jupiter
+utctimeJ='2007-02-01 T19:50:13';     % Start time
+et0J = cspice_str2et(utctimeJ);      % Converts time (which is a string) to a number
+NDAYSJ = 30;                        % Study time
+et1J = et0J + 24*3600*NDAYSJ;        % End of query time
+etJ = linspace(et0J,et1J,10000);     % Time interval
+
+% Frame
+frame = 'ECLIPJ2000';
+abcorr = 'NONE';
+
+% Observer will be Pluto barycenter
+observer = '5'; % JUPITER BARYCENTER (5)
+scale = 66854;  % Jupiter's polar radius (km)
+
+[dnh,lt] = cspice_spkezr('NEW HORIZONS',etJ,frame,abcorr,observer); % New Horizons
+[djup,lt] = cspice_spkezr('599',etJ,frame,abcorr,observer);         % Jupiter 
+[dio,lt] = cspice_spkezr('501',etJ,frame,abcorr,observer);          % Io
+[deur,lt] = cspice_spkezr('502',etJ,frame,abcorr,observer);         % Europa
+[dgan,lt] = cspice_spkezr('503',etJ,frame,abcorr,observer);         % Ganymede 
+[dcal,lt] = cspice_spkezr('504',etJ,frame,abcorr,observer);         % Callisto
+
+
+% Minimum Distance from New Horizons to Jupiter, MOONS...
+Pos1=zeros(1,3);
+
+Dist1=zeros(1,10000);
+
+Dist1(1,1)= sqrt(   (djup(1,1)-dnh(1,1))^2 + (djup(2,1)-dnh(2,1))^2 + (djup(3,1)-dnh(3,1))^2  ); 
+
+for i=2:10000
+    
+   Dist1(1,i)= sqrt(   (djup(1,i)-dnh(1,i))^2 + (djup(2,i)-dnh(2,i))^2 + (djup(3,i)-dnh(3,i))^2  ); %Calculate distance V1-Jupiter
+   
+   if (Dist1(1,i) < Dist1(1,i-1)) %Check current distance with past value
+    Pos1(1,1)=dnh(1,i); %If true, save position X Y Z of V1
+    Pos1(1,2)=dnh(2,i);
+    Pos1(1,3)=dnh(3,i);
+    Min1=Dist1(1,i)/scale;    %If true, save Distance between V1-JUP
+    a=i;                %If true, save coluwmn's index where condition is satisfied
+   end
+   % if (Dist2(1,i) < Dist2(1,i-1)) %Check current distance with past value
+   % Pos2(1,1)=dv2(1,i); %If true, save position X Y Z of V2
+   % Pos2(1,2)=dv2(2,i);
+  %  Pos2(1,3)=dv2(3,i);
+   % Min2=Dist2(1,i)/scale;   %If true, save Distance between V2-JUP
+   % b=i;               %If true, save column's index where condition is satisfied
+   %end 
+end
+
+utcstrNhJup= cspice_et2utc( etJ(a), 'C', 5 ); %Convert ephemeris time into UTC format C calendar. Date of the closest position to saturn.v1
+
+
+
+
+
+% Plot New Horizons Flyby on Jupiter
+LW = 1; % LineWidth specification
+plot_pdf = figure(1);
+set(plot_pdf,'Position',[475 250 800 500])
+plot3(djup(1,:)/scale,djup(2,:)/scale,djup(3,:)/scale,'r','LineWidth',LW);
+hold on;
+plot3(dnh(1,:)/scale,dnh(2,:)/scale,dnh(3,:)/scale,'g','LineWidth',LW);
+plot3(Pos1(1,1)/scale,Pos1(1,2)/scale,Pos1(1,3)/scale,'b*','LineWidth',6)
+text(Pos1(1,1)/scale,-20,Pos1(1,3)/scale,'NH-Jup = 34.4712 JR')
+text(-10,-20,Pos1(1,3)/scale,'NH-Jup 2007 FEB 28 05:32:53.93553')
+
+annotation('textbox', [0.8, 0.35, .19, .1], 'string', "- wrt Pluto's barycenter -- wrt Pluto")
+
+legend('Jupiter','New Horizons');
+xlabel('x JR');
+ylabel('y JR');
+zlabel('z JR');
+title("\textbf{New Horizons' flyby across Jupiter}");
+grid on;
+grid minor;
+
+%% Pluto flyby (July 2015) %
+
+% Time parameters                   _P designation for Pluto
+utctimeP='2015-06-01 T19:50:13';    % Start time
+et0P = cspice_str2et(utctimeP);     % Converts time (which is a string) to a number
+NDAYSP = 10;                     % Study time
+et1P = et0P + 24*3600*NDAYSP;       % End of query time
+etP=linspace(et0P,et1P,10000);      % Time interval
+
+
+observer = '9'; % PLUTO BARYCENTER (9)
+scale = 1188.3 ; % Pluto's radius (km)
+
+[dplu,lt] = cspice_spkezr('999',etP,frame,abcorr,observer); % Pluto
+[dnh,lt] = cspice_spkezr('NEW HORIZONS',etP,frame,abcorr,observer); % New Horizons 
+
+[dnh,lt] = cspice_spkezr('NEW HORIZONS',etP,frame,abcorr,observer); % New Horizons
+[djup,lt] = cspice_spkezr('599',etP,frame,abcorr,observer); % Jupiter 
+
+[dchar,lt] = cspice_spkezr('901',etP,frame,abcorr,observer); % Charon
+[dnix,lt] = cspice_spkezr('902',etP,frame,abcorr,observer); % Nix
+[dhydr,lt] = cspice_spkezr('903',etP,frame,abcorr,observer); % Hydra 
+
+% Plot New Horizons Flyby on Jupiter
+LW = 1; % LineWidth specification
+figure(2);
+plot3(dplu(1,:)/scale,dplu(2,:)/scale,dplu(3,:)/scale,'r','LineWidth',LW);
+hold on;
+plot3(dnh(1,:)/scale,dnh(2,:)/scale,dnh(3,:)/scale,'g','LineWidth',LW);
+legend('Pluto','New Horizons');

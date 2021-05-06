@@ -133,8 +133,8 @@ grid minor
 % set(findall(gcf,'-property','FontSize'),'FontSize',18);
 
 
-% % Save png
-print(gcf,'jupiter_voyager12_flyby.png','-dpng','-r1000');
+% % % Save png
+% print(gcf,'jupiter_voyager12_flyby.png','-dpng','-r1000');
 
 % Plot 2
 plot_pdf2 = figure(2);
@@ -152,8 +152,8 @@ title('\textbf{Minimum position of Voyager 1 and 2 flyby across Jupiter. Obs: Ju
 grid on
 grid minor
 
-% Save png
-print(gcf,'minimum_pos_voyager12.png','-dpng','-r1000');
+% % Save png
+% print(gcf,'minimum_pos_voyager12.png','-dpng','-r1000');
 
 %% Maximum velocity computation
 
@@ -218,8 +218,8 @@ legend({'V1','V2','Jupiter'});
 title('\textbf{V1 and V2 maximum velocity position. Obs: Jupiter barycenter}');
 
 
-% Save png
-print(gcf,'maximum_velocity_pos_voyager12.png','-dpng','-r1000');
+% % Save png
+% print(gcf,'maximum_velocity_pos_voyager12.png','-dpng','-r1000');
 
 
 endSPICE

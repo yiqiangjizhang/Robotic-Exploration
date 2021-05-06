@@ -5,7 +5,7 @@
 % Pluto's trajectory and Plutos barycenter
 %-------------------------------------------------------------------------%
 
-% Date: 23/04/2021
+% Date: 06/05/2021
 % Author/s: Group 1
 % Subject: Robotic Exploration of the Solar System
 % Professor: Manel Soria & Arnau Miro
@@ -23,8 +23,13 @@ set(groot,'defaultLegendInterpreter','latex');
 
 % Recall that RESSlib should be in Matlab Path 
 % Addpath Yi Qiang
-addpath 'C:\Users\yiqia\Documents\Spice_Doc\RESSlib'
-
+addpath('C:\Users\yiqia\Documents\Spice_Doc\RESSlib')
+% % Addpath Iván
+% addpath('D:\HDD_Data\Iván\Workload\Q8-GRETA\Robotic_Exploration_of_the_Solar_System\RESSlib')
+% % Addpath Èric
+% addpath('F:\RESSoptativa\Resslib')
+% % Addpath Rita
+% addpath('C:\Users\Rita Fardilha\Desktop\RESSlib/');
 
 %% Using nh_plu017.bps
 
