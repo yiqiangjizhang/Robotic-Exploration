@@ -70,7 +70,7 @@ fprintf('RESSLIB version %s \n',v);
 %% Jupiter flyby (Feb 2007)
 
 % Time parameters                    _J designation for Jupiter
-utctimeJ='2007-02-01 T19:50:13';     % Start time
+utctimeJ='2007-02-07 T19:50:13';     % Start time
 et0J = cspice_str2et(utctimeJ);      % Converts time (which is a string) to a number
 NDAYSJ = 30;                        % Study time
 et1J = et0J + 24*3600*NDAYSJ;        % End of query time
@@ -173,11 +173,10 @@ utcstrNhEuropa= cspice_et2utc( etJ(E), 'C', 5 );   %Convert ephemeris time into 
 utcstrNhGanymede= cspice_et2utc( etJ(G), 'C', 5 ); %Convert ephemeris time into UTC format C calendar. Date of Minimum distance between NewHorizons and Ganymede
 utcstrNhCallisto= cspice_et2utc( etJ(C), 'C', 5 ); %Convert ephemeris time into UTC format C calendar. Date of Minimum distance between NewHorizons and Callisto
 
-
 % Plot New Horizons Flyby on Jupiter with the Io, Europa,Ganymede and Calllisto orbits %
 LW = 1; % LineWidth specification
 plot_pdf1 = figure(1);
-set(plot_pdf1,'Position',[475 250 800 500])
+set(plot_pdf1,'Position',[475 250 1000 500])
 plot3(djup(1,:)/scale,djup(2,:)/scale,djup(3,:)/scale,'r','LineWidth',LW);
 hold on;
 plot3(dnh(1,:)/scale,dnh(2,:)/scale,dnh(3,:)/scale,'g','LineWidth',LW);
@@ -186,11 +185,38 @@ plot3(deur(1,:)/scale,deur(2,:)/scale,deur(3,:)/scale,'y','LineWidth',LW);
 plot3(dcal(1,:)/scale,dcal(2,:)/scale,dcal(3,:)/scale,'c','LineWidth',LW);
 
 % Add the points of minimum distance between New Horizons and each body %
-plot3(PosMin_NhJup(1,1)/scale,PosMin_NhJup(1,2)/scale,PosMin_NhJup(1,3)/scale,'r*','LineWidth',6)
-plot3(PosMin_NhIo(1,1)/scale,PosMin_NhIo(1,2)/scale,PosMin_NhIo(1,3)/scale,'g*','LineWidth',6)
-plot3(PosMin_NhEuropa(1,1)/scale,PosMin_NhEuropa(1,2)/scale,PosMin_NhEuropa(1,3)/scale,'b*','LineWidth',6)
-plot3(PosMin_NhGanymede(1,1)/scale,PosMin_NhGanymede(1,2)/scale,PosMin_NhGanymede(1,3)/scale,'y*','LineWidth',6)
-plot3(PosMin_NhCallisto(1,1)/scale,PosMin_NhCallisto(1,2)/scale,PosMin_NhCallisto(1,3)/scale,'c*','LineWidth',6)
+plot3(PosMin_NhJup(1,1)/scale,PosMin_NhJup(1,2)/scale,PosMin_NhJup(1,3)/scale,'r*','LineWidth',1)
+plot3(PosMin_NhIo(1,1)/scale,PosMin_NhIo(1,2)/scale,PosMin_NhIo(1,3)/scale,'g*','LineWidth',1)
+plot3(PosMin_NhEuropa(1,1)/scale,PosMin_NhEuropa(1,2)/scale,PosMin_NhEuropa(1,3)/scale,'b*','LineWidth',1)
+plot3(PosMin_NhGanymede(1,1)/scale,PosMin_NhGanymede(1,2)/scale,PosMin_NhGanymede(1,3)/scale,'y*','LineWidth',1)
+plot3(PosMin_NhCallisto(1,1)/scale,PosMin_NhCallisto(1,2)/scale,PosMin_NhCallisto(1,3)/scale,'c*','LineWidth',1)
+
+xlim([-100 100])
+ylim([-100 100])
+zlim([-10 10])
+
+legend('New Horizons', 'Minimum Distance Position', 'Jupiter', 'Minimum Distance');
+title('\textbf{New Horizons flyby. Observer: Jupiter Barycenter}');
+xlabel('x JR');
+ylabel('y JR');
+zlabel('z JR');
+grid on;
+grid minor;
+
+annotation('textbox', [0.71, 0.65, .13, .12], 'string', sprintf('Min dist NH-Jup: %.4f [km]',MinNhJup))
+annotation('textbox', [0.84, 0.65, .13, .12], 'string', sprintf('Date: %s',convertCharsToStrings(utcstrNhJup)))
+
+annotation('textbox', [0.71, 0.53, .13, .12], 'string', sprintf('Min dist NH-Io: %.4f [km]',MinNhIo))
+annotation('textbox', [0.84, 0.53, .13, .12], 'string', sprintf('Date: %s',convertCharsToStrings(utcstrNhIo)))
+
+annotation('textbox', [0.71, 0.41, .13, .12], 'string', sprintf('Min dist NH-Europa: %.4f [km]',MinNhEuropa))
+annotation('textbox', [0.84, 0.41, .13, .12], 'string', sprintf('Date: %s',convertCharsToStrings(utcstrNhEuropa)))
+
+annotation('textbox', [0.71, 0.29, .13, .12], 'string', sprintf('Min dist NH-Ganymede: %.4f [km]',MinNhGanymede))
+annotation('textbox', [0.84, 0.29, .13, .12], 'string', sprintf('Date: %s',convertCharsToStrings(utcstrNhGanymede)))
+
+annotation('textbox', [0.71, 0.17, .13, .12], 'string', sprintf('Min dist NH-Callisto: %.4f [km]',MinNhCallisto))
+annotation('textbox', [0.84, 0.17, .13, .12], 'string', sprintf('Date: %s',convertCharsToStrings(utcstrNhCallisto)))
 
 % Initialise video
 % myVideo = VideoWriter('NewHorizonsFlyby'); %open video file
