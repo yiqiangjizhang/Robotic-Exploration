@@ -91,27 +91,27 @@ scale = 66854;  % Jupiter's polar radius (km)
 
 
 % Minimum Distance from New Horizons to Jupiter, MOONS...
-Pos1=zeros(1,3);
+PosMin_NhJup=zeros(1,3);
 
-Dist1=zeros(1,10000);
+Dist_NhJup=zeros(1,10000);
 
-Dist1(1,1)= sqrt(   (djup(1,1)-dnh(1,1))^2 + (djup(2,1)-dnh(2,1))^2 + (djup(3,1)-dnh(3,1))^2  ); 
+Dist_NhJup(1,1)= sqrt(   (djup(1,1)-dnh(1,1))^2 + (djup(2,1)-dnh(2,1))^2 + (djup(3,1)-dnh(3,1))^2  ); 
 
 for i=2:10000
     
-   Dist1(1,i)= sqrt(   (djup(1,i)-dnh(1,i))^2 + (djup(2,i)-dnh(2,i))^2 + (djup(3,i)-dnh(3,i))^2  ); %Calculate distance V1-Jupiter
+   Dist_NhJup(1,i)= sqrt(   (djup(1,i)-dnh(1,i))^2 + (djup(2,i)-dnh(2,i))^2 + (djup(3,i)-dnh(3,i))^2  ); %Calculate distance V1-Jupiter
    
-   if (Dist1(1,i) < Dist1(1,i-1)) %Check current distance with past value
-    Pos1(1,1)=dnh(1,i); %If true, save position X Y Z of V1
-    Pos1(1,2)=dnh(2,i);
-    Pos1(1,3)=dnh(3,i);
-    Min1=Dist1(1,i)/scale;    %If true, save Distance between V1-JUP
+   if (Dist_NhJup(1,i) < Dist_NhJup(1,i-1)) %Check current distance with past value
+    PosMin_NhJup(1,1)=dnh(1,i); %If true, save position X Y Z of V1
+    PosMin_NhJup(1,2)=dnh(2,i);
+    PosMin_NhJup(1,3)=dnh(3,i);
+    Min1=Dist_NhJup(1,i)/scale;    %If true, save Distance between V1-JUP
     a=i;                %If true, save coluwmn's index where condition is satisfied
    end
    % if (Dist2(1,i) < Dist2(1,i-1)) %Check current distance with past value
    % Pos2(1,1)=dv2(1,i); %If true, save position X Y Z of V2
    % Pos2(1,2)=dv2(2,i);
-  %  Pos2(1,3)=dv2(3,i);
+   % Pos2(1,3)=dv2(3,i);
    % Min2=Dist2(1,i)/scale;   %If true, save Distance between V2-JUP
    % b=i;               %If true, save column's index where condition is satisfied
    %end 
@@ -130,9 +130,9 @@ set(plot_pdf,'Position',[475 250 800 500])
 plot3(djup(1,:)/scale,djup(2,:)/scale,djup(3,:)/scale,'r','LineWidth',LW);
 hold on;
 plot3(dnh(1,:)/scale,dnh(2,:)/scale,dnh(3,:)/scale,'g','LineWidth',LW);
-plot3(Pos1(1,1)/scale,Pos1(1,2)/scale,Pos1(1,3)/scale,'b*','LineWidth',6)
-text(Pos1(1,1)/scale,-20,Pos1(1,3)/scale,'NH-Jup = 34.4712 JR')
-text(-10,-20,Pos1(1,3)/scale,'NH-Jup 2007 FEB 28 05:32:53.93553')
+plot3(PosMin_NhJup(1,1)/scale,PosMin_NhJup(1,2)/scale,PosMin_NhJup(1,3)/scale,'b*','LineWidth',6)
+text(PosMin_NhJup(1,1)/scale,-20,PosMin_NhJup(1,3)/scale,'NH-Jup = 34.4712 JR')
+text(-10,-20,PosMin_NhJup(1,3)/scale,'NH-Jup 2007 FEB 28 05:32:53.93553')
 
 annotation('textbox', [0.8, 0.35, .19, .1], 'string', "- wrt Pluto's barycenter -- wrt Pluto")
 
