@@ -34,8 +34,21 @@ file_b4 = 'LC08_L2SP_091075_20210314_20210328_02_T1_SR_B4.tif'; b4 = imread(file
 % Create RGB image
 rgb = cat(3, b4, b3, b2);
 % Show image
-figure(1)
+plot_pdf = figure(1);
 imshow(rgb);
+
+
+%  Save pdf
+set(plot_pdf, 'Units', 'Centimeters');
+pos = get(plot_pdf, 'Position');
+set(plot_pdf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
+    'PaperSize',[pos(3), pos(4)]);
+print(plot_pdf, 'original_photo.pdf', '-dpdf', '-r100');
+
+% Save png
+print(gcf,'original_photo.png','-dpng','-r1000');
+
+
 
 % Added on top of the previous example
 % Convert to double
@@ -52,6 +65,16 @@ img = brightness(img, 1.);
 % Reconvert to uint16
 rgb = uint16(img * (2^16 - 1));
 
-figure(2)
+plot_pdf2 = figure(2);
 imshow(rgb);
 
+
+%  Save pdf
+set(plot_pdf2, 'Units', 'Centimeters');
+pos = get(plot_pdf2, 'Position');
+set(plot_pdf2, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
+    'PaperSize',[pos(3), pos(4)]);
+print(plot_pdf2, 'natural_color.pdf', '-dpdf', '-r100');
+
+% Save png
+print(gcf,'natural_color.png','-dpng','-r1000');

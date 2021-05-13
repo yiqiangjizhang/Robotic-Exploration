@@ -18,7 +18,6 @@ close all;
 clc;
 
 
-
 % Open bands
 file_b10 = 'LC08_L2SP_091075_20210314_20210328_02_T1_ST_B10.tif'; b10 = imread(file_b10);
 file_QA = 'LC08_L2SP_091075_20210314_20210328_02_T1_QA_PIXEL.tif'; QA = imread(file_QA);
@@ -30,13 +29,11 @@ Temp = C2L2scaledDN2T(b10) - 273.15; % deg
 % Mask all the parts that are not water
 Temp(~mask) = nan;
 
-
 UL = [244500.000,-2281500.000]; % From metadata
 LR = [473100.000,-2513100.000]; % From metadata
 [X,Y] = computeXY(UL(1),UL(2),LR(1),LR(2));
 
-
-figure(1)
+plot_pdf = figure(1);
 imagesc(Temp);
 
 % Project X,Y to lat,lon
@@ -49,6 +46,16 @@ set(geoimg,'AlphaDataMapping','none','FaceAlpha', 'texturemap');
 alpha(geoimg,double(~isnan(Temp)));
 % Set limits and color
 % axis([19.0,19.6,42.0,42.4]);
-colormap('jet'); caxis([20,30]); colorbar;
+colormap('jet'); caxis([20,32]); colorbar;
+
+%  Save pdf
+set(plot_pdf, 'Units', 'Centimeters');
+pos = get(plot_pdf, 'Position');
+set(plot_pdf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
+    'PaperSize',[pos(3), pos(4)]);
+print(plot_pdf, 'geolocalized_temperature_map.pdf', '-dpdf', '-r1000');
+
+% Save png
+print(gcf,'geolocalized_temperature_map.png','-dpng','-r1000');
 
 
