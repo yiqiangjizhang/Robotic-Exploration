@@ -35,14 +35,14 @@ imagesc(ndvi);
 colormap([0 0 0; parula(256)]);
 colorbar;
 
-%  Save pdf
-set(plot_pdf2, 'Units', 'Centimeters');
-pos = get(plot_pdf2, 'Position');
-set(plot_pdf2, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
-    'PaperSize',[pos(3), pos(4)]);
-print(plot_pdf2, 'NDVI_index.pdf', '-dpdf', '-r100');
-
-% Save png
-print(gcf,'NDVI_index.png','-dpng','-r1000');
+% %  Save pdf
+% set(plot_pdf2, 'Units', 'Centimeters');
+% pos = get(plot_pdf2, 'Position');
+% set(plot_pdf2, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
+%     'PaperSize',[pos(3), pos(4)]);
+% print(plot_pdf2, 'NDVI_index.pdf', '-dpdf', '-r100');
+% 
+% % Save png
+% print(gcf,'NDVI_index.png','-dpng','-r1000');
 
 

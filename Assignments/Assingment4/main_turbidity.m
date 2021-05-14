@@ -59,15 +59,15 @@ caxis([0 10])
 colorbar;
 
 
-%  Save pdf
-set(plot_pdf, 'Units', 'Centimeters');
-pos = get(plot_pdf, 'Position');
-set(plot_pdf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
-    'PaperSize',[pos(3), pos(4)]);
-print(plot_pdf, 'turb1.pdf', '-dpdf', '-r1000');
-
-% Save png
-print(gcf,'turb1.png','-dpng','-r1000');
+% %  Save pdf
+% set(plot_pdf, 'Units', 'Centimeters');
+% pos = get(plot_pdf, 'Position');
+% set(plot_pdf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
+%     'PaperSize',[pos(3), pos(4)]);
+% print(plot_pdf, 'turb1.pdf', '-dpdf', '-r1000');
+% 
+% % Save png
+% print(gcf,'turb1.png','-dpng','-r1000');
 
 
 
@@ -88,12 +88,12 @@ caxis([0 10])
 colorbar;
 
 
-%  Save pdf
-set(plot_pdf2, 'Units', 'Centimeters');
-pos = get(plot_pdf2, 'Position');
-set(plot_pdf2, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
-    'PaperSize',[pos(3), pos(4)]);
-print(plot_pdf2, 'turb2.pdf', '-dpdf', '-r1000');
-
-% Save png
-print(gcf,'turb2.png','-dpng','-r1000');
+% %  Save pdf
+% set(plot_pdf2, 'Units', 'Centimeters');
+% pos = get(plot_pdf2, 'Position');
+% set(plot_pdf2, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
+%     'PaperSize',[pos(3), pos(4)]);
+% print(plot_pdf2, 'turb2.pdf', '-dpdf', '-r1000');
+% 
+% % Save png
+% print(gcf,'turb2.png','-dpng','-r1000');

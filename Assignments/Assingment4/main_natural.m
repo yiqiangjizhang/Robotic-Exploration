@@ -38,15 +38,15 @@ plot_pdf = figure(1);
 imshow(rgb);
 
 
-%  Save pdf
-set(plot_pdf, 'Units', 'Centimeters');
-pos = get(plot_pdf, 'Position');
-set(plot_pdf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
-    'PaperSize',[pos(3), pos(4)]);
-print(plot_pdf, 'original_photo.pdf', '-dpdf', '-r100');
-
-% Save png
-print(gcf,'original_photo.png','-dpng','-r1000');
+% %  Save pdf
+% set(plot_pdf, 'Units', 'Centimeters');
+% pos = get(plot_pdf, 'Position');
+% set(plot_pdf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
+%     'PaperSize',[pos(3), pos(4)]);
+% print(plot_pdf, 'original_photo.pdf', '-dpdf', '-r100');
+% 
+% % Save png
+% print(gcf,'original_photo.png','-dpng','-r1000');
 
 
 
@@ -69,12 +69,12 @@ plot_pdf2 = figure(2);
 imshow(rgb);
 
 
-%  Save pdf
-set(plot_pdf2, 'Units', 'Centimeters');
-pos = get(plot_pdf2, 'Position');
-set(plot_pdf2, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
-    'PaperSize',[pos(3), pos(4)]);
-print(plot_pdf2, 'natural_color.pdf', '-dpdf', '-r100');
-
-% Save png
-print(gcf,'natural_color.png','-dpng','-r1000');
+% %  Save pdf
+% set(plot_pdf2, 'Units', 'Centimeters');
+% pos = get(plot_pdf2, 'Position');
+% set(plot_pdf2, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
+%     'PaperSize',[pos(3), pos(4)]);
+% print(plot_pdf2, 'natural_color.pdf', '-dpdf', '-r100');
+% 
+% % Save png
+% print(gcf,'natural_color.png','-dpng','-r1000');

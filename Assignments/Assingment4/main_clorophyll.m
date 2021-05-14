@@ -57,13 +57,13 @@ caxis([0 5])
 colorbar;
 
 
-%  Save pdf
-set(plot_pdf, 'Units', 'Centimeters');
-pos = get(plot_pdf, 'Position');
-set(plot_pdf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
-    'PaperSize',[pos(3), pos(4)]);
-print(plot_pdf, 'clorophyll.pdf', '-dpdf', '-r1000');
-
-% Save png
-print(gcf,'clorophyll.png','-dpng','-r1000');
+% %  Save pdf
+% set(plot_pdf, 'Units', 'Centimeters');
+% pos = get(plot_pdf, 'Position');
+% set(plot_pdf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
+%     'PaperSize',[pos(3), pos(4)]);
+% print(plot_pdf, 'clorophyll.pdf', '-dpdf', '-r1000');
+% 
+% % Save png
+% print(gcf,'clorophyll.png','-dpng','-r1000');
 

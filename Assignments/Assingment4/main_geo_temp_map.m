@@ -48,14 +48,14 @@ alpha(geoimg,double(~isnan(Temp)));
 % axis([19.0,19.6,42.0,42.4]);
 colormap('jet'); caxis([20,32]); colorbar;
 
-%  Save pdf
-set(plot_pdf, 'Units', 'Centimeters');
-pos = get(plot_pdf, 'Position');
-set(plot_pdf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
-    'PaperSize',[pos(3), pos(4)]);
-print(plot_pdf, 'geolocalized_temperature_map.pdf', '-dpdf', '-r1000');
-
-% Save png
-print(gcf,'geolocalized_temperature_map.png','-dpng','-r1000');
+% %  Save pdf
+% set(plot_pdf, 'Units', 'Centimeters');
+% pos = get(plot_pdf, 'Position');
+% set(plot_pdf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
+%     'PaperSize',[pos(3), pos(4)]);
+% print(plot_pdf, 'geolocalized_temperature_map.pdf', '-dpdf', '-r1000');
+% 
+% % Save png
+% print(gcf,'geolocalized_temperature_map.png','-dpng','-r1000');
 
 

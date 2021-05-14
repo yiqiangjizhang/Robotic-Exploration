@@ -56,13 +56,13 @@ rgb = uint16(img * (2^16 - 1));
 plot_pdf2 = figure(2);
 imshow(rgb);
 
-%  Save pdf
-set(plot_pdf2, 'Units', 'Centimeters');
-pos = get(plot_pdf2, 'Position');
-set(plot_pdf2, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
-    'PaperSize',[pos(3), pos(4)]);
-print(plot_pdf2, 'IR_color.pdf', '-dpdf', '-r100');
-
-% Save png
-print(gcf,'IR_color.png','-dpng','-r1000');
+% %  Save pdf
+% set(plot_pdf2, 'Units', 'Centimeters');
+% pos = get(plot_pdf2, 'Position');
+% set(plot_pdf2, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Centimeters', ...
+%     'PaperSize',[pos(3), pos(4)]);
+% print(plot_pdf2, 'IR_color.pdf', '-dpdf', '-r100');
+% 
+% % Save png
+% print(gcf,'IR_color.png','-dpng','-r1000');
 
