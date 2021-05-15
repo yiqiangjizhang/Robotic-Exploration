@@ -2,7 +2,7 @@
 
 clear
 close all
-img=imread('low_contrast.jpg');
+img=imread('low_contrast.jpeg');
 
 size(img) % we see it is a monochrome image stored as a RGB, to use JPG
 

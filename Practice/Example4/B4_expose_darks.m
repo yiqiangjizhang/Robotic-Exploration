@@ -4,7 +4,7 @@
 
 clear
 close all
-img=imread('expose_darks_monochrome.tiff');
+img=imread('PIA24571.tif');
 imshow(img);
 title('Original image');
 
