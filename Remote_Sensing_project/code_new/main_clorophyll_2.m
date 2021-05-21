@@ -14,8 +14,6 @@ function [] = main_clorophyll_2(b1, b2, b3, QA, file_QA, UL, LR)
 
     [X, Y] = computeXY(UL(1), UL(2), LR(1), LR(2));
 
-    figure;
-
     % Project X,Y to lat,lon
     info = georasterinfo(file_QA);
     [lat, lon] = projinv(info.RasterReference.ProjectedCRS, X, Y);
@@ -27,7 +25,7 @@ function [] = main_clorophyll_2(b1, b2, b3, QA, file_QA, UL, LR)
     % Set limits and color
     % axis([19.0,19.6,42.0,42.4]);
     colormap(flipud(winter));
-    caxis([0 5])
+    caxis([0.1 0.7])
     colorbar;
 
 end

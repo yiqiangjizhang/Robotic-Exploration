@@ -31,6 +31,7 @@ if (~isfile('data.mat'))
     b2005_s3 = imread('LT05_L2SP_092074_20050104_20200902_02_T1_SR_B3.tif'); %
     b2005_s4 = imread('LT05_L2SP_092074_20050104_20200902_02_T1_SR_B4.tif'); %
     b2005_s5 = imread('LT05_L2SP_092074_20050104_20200902_02_T1_SR_B5.tif'); %
+    b2005_s6 = imread('LT05_L2SP_092074_20050104_20200902_02_T1_ST_B6.tif'); %
     b2005_sQA = imread('LT05_L2SP_092074_20050104_20200902_02_T1_QA_PIXEL.tif'); %
     file_2005_sQA = 'LT05_L2SP_092074_20050104_20200902_02_T1_QA_PIXEL.tif';
     UL_2005_sQA = [108300.000, -2135100.000];
@@ -44,6 +45,7 @@ if (~isfile('data.mat'))
     b2005_w3 = imread('LT05_L2SP_092074_20050715_20200902_02_T1_SR_B3.tif'); %
     b2005_w4 = imread('LT05_L2SP_092074_20050715_20200902_02_T1_SR_B4.tif'); %
     b2005_w5 = imread('LT05_L2SP_092074_20050715_20200902_02_T1_SR_B5.tif'); %
+    b2005_w6 = imread('LT05_L2SP_092074_20050715_20200902_02_T1_ST_B6.tif'); %
     b2005_wQA = imread('LT05_L2SP_092074_20050715_20200902_02_T1_QA_PIXEL.tif'); %
     file_2005_wQA = 'LT05_L2SP_092074_20050715_20200902_02_T1_QA_PIXEL.tif';
     UL_2005_wQA = [108300.000, -2135100.000];
@@ -57,6 +59,7 @@ if (~isfile('data.mat'))
     b2010_s3 = imread('LT05_L2SP_092074_20091201_20200825_02_T1_SR_B3.tif'); %
     b2010_s4 = imread('LT05_L2SP_092074_20091201_20200825_02_T1_SR_B4.tif'); %
     b2010_s5 = imread('LT05_L2SP_092074_20091201_20200825_02_T1_SR_B5.tif'); %
+    b2010_s6 = imread('LT05_L2SP_092074_20091201_20200825_02_T1_ST_B6.tif'); %
     b2010_sQA = imread('LT05_L2SP_092074_20091201_20200825_02_T1_QA_PIXEL.tif'); %
     file_2010_sQA = 'LT05_L2SP_092074_20091201_20200825_02_T1_QA_PIXEL.tif';
     UL_2010_sQA = [106500.000, -2136300.000];
@@ -70,6 +73,7 @@ if (~isfile('data.mat'))
     b2010_w3 = imread('LT05_L2SP_092074_20100814_20200823_02_T1_SR_B3.tif'); %
     b2010_w4 = imread('LT05_L2SP_092074_20100814_20200823_02_T1_SR_B4.tif'); %
     b2010_w5 = imread('LT05_L2SP_092074_20100814_20200823_02_T1_SR_B5.tif'); %
+    b2010_w6 = imread('LT05_L2SP_092074_20100814_20200823_02_T1_ST_B6.tif'); %
     b2010_wQA = imread('LT05_L2SP_092074_20100814_20200823_02_T1_QA_PIXEL.tif'); %
     file_2010_wQA = 'LT05_L2SP_092074_20100814_20200823_02_T1_QA_PIXEL.tif';
     UL_2010_wQA = [110100.000, -2136000.000];
@@ -241,6 +245,10 @@ while (exit_status == false)
         case 8
             disp('Displaying Temperature')
             % Temperature
+            main_temp_2(b2005_s6);
+            main_temp_2(b2005_w6);
+            main_temp_2(b2010_s6);
+            main_temp_2(b2010_w6);
             main_temp_2(b2015_s10);
             main_temp_2(b2015_w10);
             main_temp_2(b2020_s10);
