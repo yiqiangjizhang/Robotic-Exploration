@@ -25,7 +25,7 @@ set(groot, 'defaultLegendInterpreter', 'latex');
 % % Addpath Yi Qiang
 % addpath 'C:\Users\yiqia\Documents\Spice_Doc\RESSlib'
 % % Addpath Iván
-% addpath('D:\HDD_Data\Iván\Workload\Q8-GRETA\Robotic_Exploration_of_the_Solar_System\RESSlib')
+addpath('D:\HDD_Data\Iván\Workload\Q8-GRETA\RESS\RESSlib')
 % % Addpath Èric
 % addpath('F:\RESSoptativa\Resslib')
 % % Addpath Rita
@@ -52,7 +52,8 @@ size(img) % size (TY,TX, number of channels)
 % imshow(img);
 % title('Original')
 
-METAKR = {'https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls', ...
+METAKR = {% Leap Seconds Kernels file
+    'https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls', ...
         'https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/ck/00275_01001rc.bc', ...
         'https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/ck/cas_cda_20070309.bc', ...
         'https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/ck/cas_lemms_00306_00335_v2.bc', ...
@@ -129,6 +130,42 @@ for (i = 1:1:NPX)
         [spoint, trgepc, srfvec, found] = cspice_sincpt(method, target, ...
             et, fixref, abcorr, ...
             obsrvr, dref, dvec);
+        image_data(i, j) = 255 * found;
+        [radius(i, j), lon(i, j), lat(i, j)] = cspice_reclat(spoint);
     end
 
 end
+
+figure(2)
+theoretical_pos(:, :, 1) = img;
+theoretical_pos(:, :, 2) = img;
+theoretical_pos(:, :, 3) = image_data;
+imshow(theoretical_pos);
+
+% IMAGE NAVIGATION PART 2: LON/LAT MAP
+
+longitude = lon * cspice_dpr;
+latitude = lat * cspice_dpr;
+
+data(:, 1) = reshape(longitude, 1, []);
+data(:, 2) = reshape(latitude, 1, []);
+data(:, 3) = reshape(img, 1, []);
+
+lon_max = max(data(:, 1));
+lat_max = max(data(:, 2));
+lon_min = min(data(:, 1));
+lat_min = min(data(:, 2));
+
+lon_range = [lon_min lon_max];
+lat_range = [lat_min lat_max];
+
+F = scatteredInterpolant(data(:, 1), data(:, 2), data(:, 3));
+
+[lon_matrix, lat_matrix] = meshgrid (lon_range, lat_range);
+
+figure(3);
+F.Method = 'linear';
+plot3(data(:, 1), data(:, 2), data(:, 3))
+hold on
+vq2 = F(lon_matrix, lat_matrix);
+mesh(lon_matrix, lat_matrix, vq2);
