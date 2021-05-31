@@ -305,6 +305,7 @@ plot3(djup_t(1, 1) / scale, djup_t(2, 1) / scale, djup_t(3, 1) / scale, 'k*', 'L
 plot3(v(:, 1), v(:, 2), v(:, 3), 'r')
 quiver3(v1(1), v1(2), v1(3), D(1), D(2), D(3), 0, 'Color', [0 0 0]);
 
+
 %% SUN (To see where the Sun is located)
 
 % plot3(dsun(1, J) / scale, dsun(2, J) / scale, dsun(3, J) / scale, 'k.', 'LineWidth', 5); % Sun position respect Jupiter's barycenter when NewHorizons is closest to Jupiter.
@@ -328,7 +329,8 @@ quiver3(v1(1), v1(2), v1(3), D(1), D(2), D(3), 0, 'Color', [0 0 0]);
 xlim([-100 50])
 ylim([-100 100])
 zlim([-7 4])
-
+% axis equal
+title('\textbf{New Horizons flyby across Jupiter system. Observer: Jupiter barycenter}');
 legend('Jupiter Position', 'New Horizons', 'Io', 'Ganymede', 'Europa', 'Calisto');
 xlabel('x JR');
 ylabel('y JR');
