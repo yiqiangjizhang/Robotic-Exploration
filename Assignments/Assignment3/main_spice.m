@@ -116,7 +116,7 @@ D = v2 - v1;
 quiver3(v1(1) / 100, v1(2) / 100, v1(3) / 100, D(1) / 100, D(2) / 100, D(3) / 100, 0, 'Color', [255 165 0]/255);
 
 % March 8 photo
-utctimeJ_photo = '1979-03-01 T00:00:00'; % Start time
+utctimeJ_photo = '1979-03-08 T00:00:00'; % Start time
 et0J_photo = cspice_str2et(utctimeJ_photo); % Converts time (which is a string) to a number
 NDAYSJ_photo = 1; % Study time
 et1J_photo = et0J_photo + 24 * 3600 * NDAYSJ_photo; % End of query time

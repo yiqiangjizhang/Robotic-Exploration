@@ -31,14 +31,14 @@ set(groot, 'defaultLegendInterpreter', 'latex');
 % % Addpath Rita
 % addpath('C:\Users\Rita Fardilha\Desktop\RESSlib/');
 
-if (~isfile('C1648109_RAW.IMG'))
-    url = 'https://pds-rings.seti.org/holdings/volumes/VGISS_5xxx/VGISS_5118/DATA/C16481XX/C1648109_RAW.IMG';
-    filename = 'C1648109_RAW.IMG';
+if (~isfile('C1648109_GEOMED.IMG'))
+    url = 'https://pds-rings.seti.org/holdings/volumes/VGISS_5xxx/VGISS_5118/DATA/C16481XX/C1648109_GEOMED.IMG';
+    filename = 'C1648109_GEOMED.IMG';
     outfilename = websave(filename, url);
 end
 
-img = vicarread5('C1648109_RAW.IMG');
-imshow(img);
+img = vicarread5('C1648109_GEOMED.IMG');
+imshow(2*img);
 
 class(img) % data type
 size(img) % size (TY,TX, number of channels)
@@ -49,9 +49,9 @@ size(img) % size (TY,TX, number of channels)
 % single, double: floating point images (0 to 1)
 
 
-img = vicarread5('C1648109_RAW.IMG');
+img = vicarread5('C1648109_GEOMED.IMG');
 figure(1);
-imshow(img);
+imshow(2*img);
 title('Original')
 
 
