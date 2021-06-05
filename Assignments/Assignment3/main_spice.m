@@ -136,16 +136,18 @@ zlim([-2 6])
 xlabel('X JR');
 ylabel('Y JR');
 zlabel('Z JR');
-% axis('equal');
+axis('equal');
 legend({'Voyager 1', 'Jupiter', 'Io', 'Europa', 'Ganymede', 'Calisto', 'Sun rays'});
 title('\textbf{Jupiter Voyager 1. Obs: Jupiter barycenter}');
 grid on
 grid minor
 
 % View from top
-az = 0;
-el = 90;
-view(az, el);
+% az = 0;
+% el = 90;
+% view(az, el);
+
+
 
 % % Figure 1
 % set(plot_pdf, 'Units', 'Centimeters');

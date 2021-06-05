@@ -16,10 +16,10 @@ function [] = main_natural(b2, b3, b4)
     %img = whitebalance(img, 'patch', [2055, 6063], [100, 100]);
     % Curve editing
     img = curve(img, 'rgb', ...
-         [0.01, 0.25, 0.45, 0.55, 0.6, 0.7, 1.], ...
-         [0., 0.2, 0.4, 0.8, 0.9, 0.95, 1.]);
+         [0.01, 0.2, 0.5, 0.55, 0.6, 0.9, 1.], ...
+         [0., 0.2, 0.7, 0.8, 0.9, 0.95, 1.]);
     % Brightness and contrast
-    img = brightness(img, 1.);
+    img = brightness(img, 2.);
     
     % img = imadjust(img,stretchlim(img),[0 1]);
     % img(img>1) = 1;

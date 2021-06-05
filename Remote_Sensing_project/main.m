@@ -177,6 +177,7 @@ while (exit_status == false)
             main_natural(b2010_w1, b2010_w2, b2010_w3);
             main_natural(b2015_s2, b2015_s3, b2015_s4);
             main_natural(b2015_w2, b2015_w3, b2015_w4);
+            main_natural(b2020_s2, b2020_s3, b2020_s4);
             main_natural(b2020_w2, b2020_w3, b2020_w4);
         case 2
             disp('Displaying Infrared')
